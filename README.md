@@ -42,4 +42,13 @@ dedupe.group([
   [2, 3, 4]
 ]);
 // => [[1, 2], [3, 4]]
+
+function getId(item) {
+  return item.id;
+}
+dedupe.group([
+  [{id: 1}, {id: 1}, {id: 2}],
+  [{id: 2}, {id: 3}, {id: 4}]
+]);
+// => [[{id: 1}, {id: 2}], [{id: 3}, {id: 4}]]
 ```
