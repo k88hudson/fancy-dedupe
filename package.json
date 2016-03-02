@@ -1,0 +1,15 @@
+{
+  "name": "fancy-dedupe",
+  "version": "0.0.0",
+  "description": "A dedupe utility library",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha -R spec ./test"
+  },
+  "author": "@k88hudson",
+  "license": "MPL-2.0",
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "mocha": "^2.4.5"
+  }
+}
