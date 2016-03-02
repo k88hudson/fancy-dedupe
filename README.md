@@ -1,5 +1,7 @@
 # fancy-dedupe
 
+![travis status](https://travis-ci.org/k88hudson/fancy-dedupe.svg?branch=master)
+
 ## Usage
 
 ```
