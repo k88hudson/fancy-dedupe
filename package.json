@@ -2,9 +2,12 @@
   "name": "fancy-dedupe",
   "version": "0.0.0",
   "description": "A dedupe utility library",
+  "repository": "https://github.com/k88hudson/fancy-dedupe",
   "main": "index.js",
   "scripts": {
-    "test": "mocha -R spec ./test"
+    "test": "mocha -R spec ./test",
+    "preversion": "npm test",
+    "postversion": "npm publish && git push origin master --tags"
   },
   "author": "@k88hudson",
   "license": "MPL-2.0",
