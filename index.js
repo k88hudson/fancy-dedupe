@@ -1,9 +1,13 @@
 "use strict";
 
 module.exports = {
+  defaults: {
+    createKey: (item => item),
+    compare: (() => false)
+  },
   one(values, createKey, compare) {
-    createKey = createKey || (item => item);
-    compare = compare|| (() => false);
+    createKey = createKey || this.defaults.createKey;
+    compare = compare || this.defaults.compare;
     const valueMap = new Map();
     values.forEach(value => {
       const key = createKey(value);
@@ -17,8 +21,8 @@ module.exports = {
   group(groups, createKey, compare) {
     const globalKeys = new Set();
     const result = [];
-    createKey = createKey || (item => item);
-    compare = compare|| (() => false);
+    createKey = createKey || this.defaults.createKey;
+    compare = compare || this.defaults.compare;
     groups.forEach(values => {
       const valueMap = new Map();
       values.forEach(value => {

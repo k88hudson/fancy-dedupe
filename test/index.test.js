@@ -55,4 +55,27 @@ describe("dedupe", () => {
       assert.deepEqual(dedupe.group(beforeItems, item => item.id, compare), afterItems);
     });
   });
+  describe("defaults", () => {
+    const originalDefaults = {
+      createKey: (item => item),
+      compare: (() => false)
+    };
+    afterEach(() => {
+      dedupe.defaults = originalDefaults;
+    });
+    it("should allow overriding of createKey", () => {
+      dedupe.defaults.createKey = (item => item.id);
+      const beforeItems = [{id: 1}, {id: 2}, {id: 2}, {id: 2}, {id: 2}, {id: 3}, {id: 1}];
+      const afterItems = [{id: 1}, {id: 2}, {id: 3}];
+      assert.deepEqual(dedupe.one(beforeItems), afterItems);
+    });
+    it("should allow overriding of compare", () => {
+      dedupe.defaults.compare = function compare(previous, current) {
+        return current.amount > previous.amount;
+      };
+      const beforeItems = [{id: 1, amount: 50}, {id: 1, amount: 100}];
+      const afterItems = [{id: 1, amount: 100}];
+      assert.deepEqual(dedupe.one(beforeItems, item => item.id), afterItems);
+    });
+  });
 });
