@@ -1,6 +1,6 @@
 {
   "name": "fancy-dedupe",
-  "version": "0.0.2",
+  "version": "0.1.0",
   "description": "A dedupe utility library",
   "repository": "https://github.com/k88hudson/fancy-dedupe",
   "main": "index.js",
