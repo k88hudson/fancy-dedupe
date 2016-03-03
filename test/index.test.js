@@ -14,6 +14,14 @@ describe("dedupe", () => {
       const afterItems = [{id: 1}, {id: 2}, {id: 3}];
       assert.deepEqual(dedupe.one(beforeItems, item => item.id), afterItems);
     });
+    it("should take a custom comparison function", () => {
+      const beforeItems = [{id: 1, amount: 50}, {id: 1, amount: 100}];
+      const afterItems = [{id: 1, amount: 100}];
+      function compare(previous, current) {
+        return current.amount > previous.amount;
+      }
+      assert.deepEqual(dedupe.one(beforeItems, item => item.id, compare), afterItems);
+    });
   });
   describe(".group()", () => {
     it("should remove duplicates inside the groups", () => {
@@ -30,6 +38,21 @@ describe("dedupe", () => {
       const beforeItems = [[{id: 1}, {id: 1}, {id: 2}], [{id: 1}, {id: 3}, {id: 2}], [{id: 1}, {id: 2}, {id: 5}]];
       const afterItems = [[{id: 1}, {id: 2}], [{id: 3}], [{id: 5}]];
       assert.deepEqual(dedupe.group(beforeItems, item => item.id), afterItems);
+    });
+    it("should take a custom comparison function", () => {
+      const beforeItems = [
+        [{id: 1, amount: 50}, {id: 1, amount: 100}],
+        [{id: 1, amount: 200}, {id: 2, amount: 0}, {id: 2, amount: 100}]
+      ];
+      const afterItems = [
+        [{id: 1, amount: 100}],
+        [{id: 2, amount: 100}]
+      ];
+
+      function compare(previous, current) {
+        return current.amount > previous.amount;
+      }
+      assert.deepEqual(dedupe.group(beforeItems, item => item.id, compare), afterItems);
     });
   });
 });
